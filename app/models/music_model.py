@@ -25,7 +25,7 @@ class MusicModel:
 
     def generar_espectrogramas(self, audio, sr):
         resultados = {}
-        
+    
         # Espectrograma MEL
         mel_spect = librosa.feature.melspectrogram(y=audio, sr=sr)
         mel_spect_db = librosa.power_to_db(mel_spect, ref=np.max)
@@ -39,8 +39,8 @@ class MusicModel:
         plt.savefig(buf, format='png')
         buf.seek(0)
         resultados['mel'] = base64.b64encode(buf.getvalue()).decode('utf-8')
-        plt.close()
-        
+        plt.close('all')  # Cierra todas las figuras abiertas
+
         # MFCC
         mfccs = librosa.feature.mfcc(y=audio, sr=sr)
         plt.figure(figsize=(10, 4))
@@ -52,13 +52,11 @@ class MusicModel:
         plt.savefig(buf, format='png')
         buf.seek(0)
         resultados['mfcc'] = base64.b64encode(buf.getvalue()).decode('utf-8')
-        plt.close()
-        
+        plt.close('all')  # Cierra todas las figuras abiertas
+
         return resultados
 
     def predecir_genero(self, audio_path):
-
-        self.modelo = tf.keras.models.load_model("app/models/modelo_entrenado_6.h5")
 
         caracteristicas, audio, sr = self.extraer_caracteristicas(audio_path, offset=50)
         if caracteristicas is None:
