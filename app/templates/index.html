@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold mb-6">Analizar Cancion</h2>
+    
+    <form action="{{ url_for('main.predict') }}" method="post" enctype="multipart/form-data" 
+          class="space-y-6" id="uploadForm">
+        <div class="space-y-2">
+            <label class="block text-gray-700">Selecciona un archivo de audio</label>
+            <input type="file" name="file" accept=".wav,.mp3" 
+                   class="w-full p-2 border rounded" required>
+        </div>
+        
+        <div id="preview" class="hidden">
+            <audio controls class="w-full mt-4">
+                <source src="" type="audio/mpeg">
+                Tu navegador no soporta la reproducción de audio.
+            </audio>
+        </div>
+        
+        <button type="submit" 
+                class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+            Analizar
+        </button>
+    </form>
+    
+    <div id="loading" class="hidden text-center py-4">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+        <p class="mt-2 text-gray-600">Analizando audio...</p>
+    </div>
+</div>
+{% endblock %}

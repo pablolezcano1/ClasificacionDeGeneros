@@ -1,14 +1,10 @@
+# config.py
 import os
 
 class Config:
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    SECRET_KEY = 'tu_clave_secreta'
-    UPLOAD_FOLDER = os.path.join(BASE_DIR, 'uploads')
-    MODEL_PATH = os.path.join(BASE_DIR, 'modelos', 'modelo_entrenado_6.h5')
-    ALLOWED_EXTENSIONS = {'wav', 'mp3'}
-    GENRES = ['blues', 'classical', 'country', 'disco', 'hiphop', 
-              'jazz', 'metal', 'pop', 'reggae', 'rock']
-
-    @staticmethod
-    def init_app(app):
-        os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-key-12345'
+    UPLOAD_FOLDER = os.path.join('app', 'static', 'uploads')
+    MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # Aumentado a 50MB
+    # Agregamos estas configuraciones
+    MAX_CONTENT_PATH = None
+    UPLOAD_EXTENSIONS = ['.wav']
