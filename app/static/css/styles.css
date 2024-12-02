@@ -1,13 +1,15 @@
-.custom-file-upload {
-    border: 2px dashed #cbd5e0;
-    border-radius: 0.5rem;
-    padding: 2rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
+/* Botones */
+button:hover {
+    transform: scale(1.02);
 }
 
-.custom-file-upload:hover {
-    border-color: #4299e1;
-    background-color: #ebf8ff;
+/* Tarjetas de predicciones */
+.bg-gray-50:hover {
+    background-color: #f3f4f6;
+}
+
+/* Efecto en imágenes */
+img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease-in-out;
 }

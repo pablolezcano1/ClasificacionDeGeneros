@@ -5,6 +5,34 @@
     <h2 class="text-2xl font-bold mb-6">Resultados del Análisis</h2>
     
     <div class="space-y-8">
+        <!-- Género Principal -->
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-blue-600">{{ resultado[0].genero }}</h1>
+            <p class="text-gray-600 mt-4">
+                {% if resultado[0].genero == "Blues" %}
+                    Tu canción es <b>Blues</b> ya que tiene progresiones armónicas características y ritmos relajados.
+                {% elif resultado[0].genero == "Classical" %}
+                    Tu canción es <b>Clásica</b> por su complejidad melódica y estructura orquestal.
+                {% elif resultado[0].genero == "Country" %}
+                    Tu canción es <b>Country</b> gracias a sus letras emotivas y melodías acústicas.
+                {% elif resultado[0].genero == "Disco" %}
+                    Tu canción es <b>Disco</b>, con ritmos bailables y un estilo vibrante.
+                {% elif resultado[0].genero == "Hip-Hop" %}
+                    Tu canción es <b>Hip-Hop</b>, con ritmos contundentes y letras rítmicas.
+                {% elif resultado[0].genero == "Jazz" %}
+                    Tu canción es <b>Jazz</b>, con improvisación y armonías complejas.
+                {% elif resultado[0].genero == "Metal" %}
+                    Tu canción es <b>Metal</b>, con guitarras eléctricas pesadas y energía intensa.
+                {% elif resultado[0].genero == "Pop" %}
+                    Tu canción es <b>Pop</b>, con melodías pegajosas y ritmos modernos.
+                {% elif resultado[0].genero == "Reggae" %}
+                    Tu canción es <b>Reggae</b>, con ritmos relajados y raíces en la cultura jamaicana.
+                {% elif resultado[0].genero == "Rock" %}
+                    Tu canción es <b>Rock</b>, con energía, guitarras eléctricas y líricas profundas.
+                {% endif %}
+            </p>
+        </div>
+        
         <!-- Predicciones -->
         <div class="space-y-4">
             <h3 class="text-xl font-semibold">Predicciones de Género</h3>
@@ -16,8 +44,7 @@
                         <span class="text-blue-600">{{ "%.2f"|format(pred.probabilidad) }}%</span>
                     </div>
                     <div class="mt-2 bg-gray-200 rounded-full h-2">
-                        <div class="bg-blue-600 rounded-full h-2" 
-                             style="width: {{ pred.probabilidad }}%"></div>
+                        <div class="bg-blue-600 rounded-full h-2" style="width: {{ pred.probabilidad }}%"></div>
                     </div>
                 </div>
                 {% endfor %}
@@ -30,23 +57,24 @@
             <div class="grid md:grid-cols-2 gap-4">
                 <div>
                     <h4 class="font-medium mb-2">Espectrograma MEL</h4>
-                    <img src="data:image/png;base64,{{ espectrogramas.mel }}" 
-                         alt="Espectrograma MEL" 
-                         class="w-full rounded-lg shadow">
+                    <a href="data:image/png;base64,{{ espectrogramas.mel }}" target="_blank">
+                        <img src="data:image/png;base64,{{ espectrogramas.mel }}" alt="Espectrograma MEL" 
+                             class="w-full rounded-lg shadow cursor-pointer">
+                    </a>
                 </div>
                 <div>
                     <h4 class="font-medium mb-2">MFCC</h4>
-                    <img src="data:image/png;base64,{{ espectrogramas.mfcc }}" 
-                         alt="MFCC" 
-                         class="w-full rounded-lg shadow">
+                    <a href="data:image/png;base64,{{ espectrogramas.mfcc }}" target="_blank">
+                        <img src="data:image/png;base64,{{ espectrogramas.mfcc }}" alt="MFCC" 
+                             class="w-full rounded-lg shadow cursor-pointer">
+                    </a>
                 </div>
             </div>
         </div>
     </div>
     
     <div class="mt-8">
-        <a href="{{ url_for('main.index') }}" 
-           class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
+        <a href="{{ url_for('main.index') }}" class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
             Analizar otra canción
         </a>
     </div>
